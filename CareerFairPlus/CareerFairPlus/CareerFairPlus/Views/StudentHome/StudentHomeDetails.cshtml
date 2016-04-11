@@ -1,0 +1,31 @@
+﻿@model CareerFairPlus.Models.CompaniesList
+
+@{
+    ViewBag.Title = "StudentHomeDetails";
+}
+@using CareerFairPlus.Models;
+@using CareerFairPlus.Controllers;
+<div class="fullpage" style="background-color:#FFE4C4; width:50%; border-style:solid;" >
+<h2>Home Page</h2>
+
+    <table border="1">
+    <tr>
+    <th>Company Name</th>
+    <th>Booth</th>
+    <th>Queue</th>
+
+    </tr>
+    @foreach (var item in Model.GetCompanies())
+{
+    
+
+   <tr> 
+   <td>@Html.ActionLink(@item.companyName, "StudentCompanyDetails", new { @id = @item.companyId })</td>
+   <td> @item.boothList[0].boothID </td>  
+   <td> @item.boothList[0].queueLength </td>  
+   </tr>
+
+}
+   
+    </table>
+    <//div>

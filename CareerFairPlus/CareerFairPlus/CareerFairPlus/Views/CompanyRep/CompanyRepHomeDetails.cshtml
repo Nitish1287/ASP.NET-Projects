@@ -1,0 +1,13 @@
+﻿@model CareerFairPlus.Models.JobsList
+
+@{
+    ViewBag.Title = "CompanyRepHomeDetails";
+}
+
+<h2>Home Page</h2>
+@foreach (var item in Model.GetJobs(User.Identity.Name))
+{
+    <li>@item.title</li>
+}
+<p>@Html.ActionLink("Add job", "CompanyRepJobForm")</p> 
+<p>@Html.ActionLink("Generate Report","CompanyRepReportGen")</p>

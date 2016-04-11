@@ -1,0 +1,15 @@
+﻿@model CareerFairPlus.Models.Reports
+
+@{
+    ViewBag.Title = "CompanyRepReportGen";
+}
+
+<h2>Reports</h2>
+
+@{
+    List<Int32> items = new List<Int32>();
+    items = Model.getReports();
+}
+<p>--No. of students are interested in the company: @items[0]</p>
+<p>--No. of students visited the company booth: @items[1]</p>
+

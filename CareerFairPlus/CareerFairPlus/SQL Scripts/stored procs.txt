@@ -1,0 +1,68 @@
+drop procedure spRegisterUser
+
+drop procedure reportGeneration
+
+delimiter //
+create procedure spRegisterUser(IN username varchar(50), IN password varchar(50), IN emailid varchar(50), 
+								IN role varchar(10), IN uid int(10), IN fname varchar(50),
+                                IN lname varchar(20), IN major varchar(10), IN degree varchar(10),
+                                IN address varchar(200), IN phone int(10))
+begin
+declare uinCount, emailCount int default 0;
+SELECT 
+    @uinCount:=COUNT(*)
+FROM
+    student
+WHERE
+    uin = uid;
+SELECT 
+    @emailCount:=COUNT(*)
+FROM
+    credentials
+WHERE
+    email = emailid;
+IF (uinCount = 0 AND emailCount = 0) THEN
+START transaction;
+Insert Into credentials(username,password,email,role) Values(username,password,email,role);
+Insert Into student(uin,first_name,last_name,major,degree,address,email,phone)
+ values(uin,fname,lname,major,degree,address,email,phone);
+COMMIT;
+End IF;
+END
+
+//
+delimiter ; 
+
+DELIMITER $$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `reportGeneration`(IN companyId INT, OUT m INT, OUT n INT)
+BEGIN
+	SELECT COUNT(DISTINCT student_id) INTO m FROM student_company_info WHERE company_id = companyId AND interest = 1;
+	SELECT COUNT(DISTINCT sbi.student_id) INTO n FROM student_booth_info sbi, booth b WHERE b.company_id = companyId AND b.id = sbi.booth_id;
+END
+
+drop procedure EditBoothQueue;
+
+
+delimiter //
+CREATE PROCEDURE EditBoothQueue( IN companyid int,  IN studentID int)
+begin
+
+declare length, boothpk int;
+
+select  queue_length, id into length, boothpk from booth where booth.company_id = companyid;
+-- select booth_id,length, boothpk, studentID ;
+
+insert into student_booth_info (student_id, booth_id)
+values( studentID, boothpk);
+
+update booth set queue_length = length + 1 where id = companyid ;
+		
+end
+//
+
+delimiter ;
+
+select * from student_booth_info;
+call EditBoothQueue ( 2,3);
+select * from booth;

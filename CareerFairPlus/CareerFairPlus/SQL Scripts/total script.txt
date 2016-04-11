@@ -1,0 +1,262 @@
+DROP DATABASE IF EXISTS `career_fair_plus`;
+CREATE DATABASE IF NOT EXISTS `career_fair_plus` /*!40100 DEFAULT CHARACTER SET utf8 */;
+USE `career_fair_plus`;
+-- MySQL dump 10.13  Distrib 5.6.17, for Win32 (x86)
+--
+-- Host: localhost    Database: career_fair_plus
+-- ------------------------------------------------------
+-- Server version	5.6.20
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `student`
+--
+
+DROP TABLE IF EXISTS `student`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `student` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `uin` int(9) NOT NULL,
+  `first_name` varchar(50) NOT NULL,
+  `last_name` varchar(50) NOT NULL,
+  `major` varchar(50) NOT NULL,
+  `degree` varchar(50) NOT NULL,
+  `address` varchar(50) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `phone` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `student`
+--
+
+LOCK TABLES `student` WRITE;
+/*!40000 ALTER TABLE `student` DISABLE KEYS */;
+INSERT INTO `student` VALUES (1,923007907,'Rahul','Bhandari','Management Information Systems','Masters','College Main','rahul@gmail.com',123456789),(2,987654321,'Nitish','Neelagiri','Management Information Systems','Masters','College Main','nitish.neelagiri@gmail.com',123456789);
+/*!40000 ALTER TABLE `student` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `company`
+--
+
+DROP TABLE IF EXISTS `company`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `company` (
+  `id` int(10) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `sector` varchar(50) NOT NULL,
+  `headquarters` varchar(50) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `company`
+--
+
+LOCK TABLES `company` WRITE;
+/*!40000 ALTER TABLE `company` DISABLE KEYS */;
+INSERT INTO `company` VALUES (1,'AIG','Insurance','New York'),(2,'KPMG','Consulting','Dallas');
+/*!40000 ALTER TABLE `company` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `company_rep`
+--
+ 
+DROP TABLE IF EXISTS `company_rep`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `company_rep` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `company_id` int(10) NOT NULL,
+  `first_name` varchar(50) NOT NULL,
+  `last_name` varchar(50) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `phone` int(11) NOT NULL,
+  `isAlumni` int(1) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_company1_idx` (`company_id`),
+  CONSTRAINT `fk_company1` FOREIGN KEY (`company_id`) REFERENCES `company` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `company_rep`
+--
+
+LOCK TABLES `company_rep` WRITE;
+/*!40000 ALTER TABLE `company_rep` DISABLE KEYS */;
+INSERT INTO `company_rep` VALUES (1,1,'Vishy','Raman','vishy@aig.com',1234567890,0),(2,2,'Matt','Mills','matt@kpmg.com',1234567890,1);
+/*!40000 ALTER TABLE `company_rep` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `job`
+--
+
+DROP TABLE IF EXISTS `job`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `job` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `company_id` int(10) NOT NULL,
+  `seeking_degree` varchar(50) NOT NULL,
+  `type` varchar(50) NOT NULL,
+  `title` varchar(50) NOT NULL,
+  `visa_sponsorhip` int(1) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_company2_idx` (`company_id`),
+  CONSTRAINT `fk_company2` FOREIGN KEY (`company_id`) REFERENCES `company` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `job`
+--
+
+LOCK TABLES `job` WRITE;
+/*!40000 ALTER TABLE `job` DISABLE KEYS */;
+INSERT INTO `job` VALUES (1,1,'Masters','Internship','Technology Analyst',1),(2,2,'Bachelors','Full Time','Information Protection',0);
+/*!40000 ALTER TABLE `job` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `booth`
+--
+
+DROP TABLE IF EXISTS `booth`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `booth` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `company_id` int(10) NOT NULL,
+  `booth_number` varchar(5) NOT NULL,
+  `day` date NOT NULL,
+  `queue_length` int(5) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_company3_idx` (`company_id`),
+  CONSTRAINT `fk_company3` FOREIGN KEY (`company_id`) REFERENCES `company` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `booth`
+--
+
+LOCK TABLES `booth` WRITE;
+/*!40000 ALTER TABLE `booth` DISABLE KEYS */;
+INSERT INTO `booth` VALUES (1,1,'A1','2014-09-16',10),(2,2,'C4','2014-09-17',6);
+/*!40000 ALTER TABLE `booth` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `student_company_info`
+--
+
+DROP TABLE IF EXISTS `student_company_info`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `student_company_info` (
+  `student_id` int(10) NOT NULL,
+  `company_id` int(10) NOT NULL,
+  `interest` int(1) NOT NULL,
+  `notes` varchar(5000),
+  KEY `fk_student1_idx` (`student_id`),
+  KEY `fk_company4_idx` (`company_id`),
+  CONSTRAINT `fk_student1` FOREIGN KEY (`student_id`) REFERENCES `student` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_company4` FOREIGN KEY (`company_id`) REFERENCES `company` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `student_company_info`
+--
+
+LOCK TABLES `student_company_info` WRITE;
+/*!40000 ALTER TABLE `student_company_info` DISABLE KEYS */;
+INSERT INTO `student_company_info` VALUES (1,1,1,'abc'),(2,2,1,'xyz');
+/*!40000 ALTER TABLE `student_company_info` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `student_booth_info`
+--
+
+DROP TABLE IF EXISTS `student_booth_info`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `student_booth_info` (
+  `student_id` int(10) NOT NULL,
+  `booth_id` int(10) NOT NULL,
+  KEY `fk_student2_idx` (`student_id`),
+  KEY `fk_booth1_idx` (`booth_id`),
+  CONSTRAINT `fk_student2` FOREIGN KEY (`student_id`) REFERENCES `student` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_booth1` FOREIGN KEY (`booth_id`) REFERENCES `booth` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `student_booth_info`
+--
+
+LOCK TABLES `student_booth_info` WRITE;
+/*!40000 ALTER TABLE `student_booth_info` DISABLE KEYS */;
+INSERT INTO `student_booth_info` VALUES (1,1),(2,2);
+/*!40000 ALTER TABLE `student_booth_info` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `credentials`
+--
+
+DROP TABLE IF EXISTS `credentials`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `credentials` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `username` varchar(50) NOT NULL,
+  `password` varchar(50) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `role` varchar(50) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `credentials`
+--
+
+LOCK TABLES `credentials` WRITE;
+/*!40000 ALTER TABLE `credentials` DISABLE KEYS */;
+INSERT INTO `credentials` VALUES (1,'rahul','secret','rahul@gmail.com','student'),(2,'matt','cutting','matt@kpmg.com','company_rep');
+/*!40000 ALTER TABLE `credentials` ENABLE KEYS */;
+UNLOCK TABLES;
+
+
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2014-09-18 18:24:12

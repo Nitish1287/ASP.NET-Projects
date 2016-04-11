@@ -1,0 +1,55 @@
+﻿@model CareerFairPlus.Models.Job
+
+@{
+    ViewBag.Title = "CompanyRepJobForm";
+}
+
+<h2>CompanyRepJobForm</h2>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Job</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.seeking_degree)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.seeking_degree)
+            @Html.ValidationMessageFor(model => model.seeking_degree)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.type)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.type)
+            @Html.ValidationMessageFor(model => model.type)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.title)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.title)
+            @Html.ValidationMessageFor(model => model.title)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.visa_sponsorship)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.visa_sponsorship)
+            @Html.ValidationMessageFor(model => model.visa_sponsorship)
+        </div>
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "CompanyRepHomeDetails")
+</div>

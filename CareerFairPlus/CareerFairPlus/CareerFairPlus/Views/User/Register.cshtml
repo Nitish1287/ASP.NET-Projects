@@ -1,0 +1,138 @@
+﻿@model CareerFairPlus.Models.User
+
+@{
+    ViewBag.Title = "Register";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+   List<SelectListItem> majorListItems= new List<SelectListItem>();
+   majorListItems.Add(new SelectListItem
+        {
+          Text = "MIS",
+          Value = "MIS",
+          Selected = true
+        });
+   majorListItems.Add(new SelectListItem
+        {
+            Text = "CS",
+            Value = "CS"
+        });
+   majorListItems.Add(new SelectListItem
+        {
+            Text = "CEM",
+            Value = "CEM"
+        });
+}
+
+@{
+    List<SelectListItem> degreeListItems = new List<SelectListItem>();
+    degreeListItems.Add(new SelectListItem
+    {
+        Text = "UnderGraduate",
+        Value = "UnderGraduate"
+    });
+    degreeListItems.Add(new SelectListItem
+    {
+        Text = "Graduate",
+        Value = "Graduate",
+        Selected = true
+    });
+    degreeListItems.Add(new SelectListItem
+    {
+        Text = "PhD",
+        Value = "PhD"
+    });
+}
+
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true, "Registration failed. Check your registation details.");
+    <div>
+    <fieldset>
+    <div class="editor-label">
+                @Html.LabelFor(u => u.UIN)
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(u => u.UIN)
+                @Html.ValidationMessageFor(u => u.UIN)
+            </div>
+            <div class="editor-label">
+                @Html.LabelFor(u => u.FirstName)
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(u => u.FirstName)
+                @Html.ValidationMessageFor(u => u.FirstName)
+            </div>
+            <div class="editor-label">
+                @Html.LabelFor(u => u.LastName)
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(u => u.LastName)
+                @Html.ValidationMessageFor(u => u.LastName)
+            </div>
+            <div class="editor-label">
+                @Html.LabelFor(u => u.Major)
+            </div>
+            <div class="editor-field">
+                @Html.DropDownListFor(u => u.Major, majorListItems, "--Select Option")
+                @Html.ValidationMessageFor(u => u.Major)
+            </div>
+            <div class="editor-label">
+                @Html.LabelFor(u => u.Degree)
+            </div>
+            <div>
+                @Html.DropDownListFor(u => u.Degree, degreeListItems, "--Select Option--")
+                @Html.ValidationMessageFor(u => u.Degree)
+            </div>
+            <div class="editor-label">
+                @Html.LabelFor(u => u.Address)
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(u => u.Address)
+                @Html.ValidationMessageFor(u => u.Address)
+            </div>
+            <div class="editor-label">
+                @Html.LabelFor(u => u.Phone)
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(u => u.Phone)
+                @Html.ValidationMessageFor(u => u.Phone)
+            </div>
+    </fieldset>
+        <fieldset>
+            <legend>Login Information</legend>
+            <div class="editor-label">
+                @Html.LabelFor(u => u.UserName)
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(u => u.UserName)
+                @Html.ValidationMessageFor(u => u.UserName)
+            </div>
+            <div class="editor-label">
+                @Html.LabelFor(u => u.Password)
+            </div>
+            <div class="editor-field">
+                @Html.PasswordFor(u => u.Password)
+                @Html.ValidationMessageFor(u => u.Password)
+            </div>
+            <div class="editor-label">
+                @Html.LabelFor(u => u.Email)
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(u => u.Email)
+                @Html.ValidationMessageFor(u => u.Email)
+            </div>
+            <div class="editor-label">
+                @Html.LabelFor(u => u.Role)
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(u => u.Role)
+                @Html.ValidationMessageFor(u => u.Role)
+            </div>
+            <input type="submit" value="Register" />
+        </fieldset>
+    </div>
+}
+

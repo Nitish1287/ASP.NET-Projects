@@ -1,0 +1,31 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+</head>
+<body style="background-color:White">
+<div id="banner" style="background-color:#842323;">
+    <img alt="" src="../../Content/Images/primaryMark.png" />  
+    <div align="right">    
+        <h4 style="background-position:right;font-family:Times New Roman;color:White">CAREER FAIR PLUS</h4>
+    </div>
+</div>  
+    <div style="background-color:#842323;" align="right">
+        @if (Request.IsAuthenticated) {
+            <strong>@Html.Encode(User.Identity.Name)</strong>
+            <h4 style="color:White">@Html.ActionLink("Sign Out", "Logout", "User")</h4>
+        }
+        else {
+            @Html.ActionLink("Register", "Register", "User", null, new { style = "color:White" })
+            <span> | </span>
+            @Html.ActionLink("Sign In", "Login", "User", null, new { style = "color:White" })
+        }
+    </div>
+ 
+    @RenderBody()
+ 
+    @RenderSection("scripts", required: false)
+</body>
+</html>

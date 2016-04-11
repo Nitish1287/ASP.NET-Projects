@@ -1,0 +1,125 @@
+﻿@model CareerFairPlus.Models.StudentCompanyInformation
+
+@{
+    ViewBag.Title = "StudentCompanyDetails";
+}
+@using CareerFairPlus.Models;
+
+<style type="text/css">
+    .textboxclass
+    {
+        width:180px;
+        height:250px;
+        
+        
+  
+    }
+
+</style>
+<div>
+<div class="fullpage" style="background-color:#FFE4C4; width:50%; border-style:solid; float:left" >
+
+  @{
+      var val = false;
+      if(@Model.isInterested == "1")
+      {
+          val = true;
+      }
+  }  
+<h2> <a href="http://www.google.com/search?q=@Model.companyName" target="_blank"> @Model.companyName</a> @Html.CheckBox("Interested", val) </h2>
+@using (Html.BeginForm("StudentCompanyDetails", "StudentHome"))
+{
+
+<p>In Queue @Html.CheckBoxFor(model => model.inQueue, new { onClick = "this.form.submit();" })</p>
+   
+}
+
+
+<table border="1" width="50%">
+<tr>
+<th>Jobs available</th>
+</tr>
+@foreach (var item in @Model.jobs)
+{
+    <tr><td>@item.title</td></tr>
+}
+</table>
+
+<br />
+<div class="Personalsection"> 
+<table border="1" width="50%";> 
+<tr>
+<th>Notes</th>
+</tr>
+
+<tr>
+<td>@Model.notes</td>
+</tr>
+
+</table>
+<p>NOTES</p>
+<p>
+@using (Html.BeginForm("StudentCompanyDetails", "StudentHome"))
+{   
+    @Html.TextAreaFor(m => Model.notes, new { @class = "textboxclass"});
+     <input type="submit" value="Update Notes" />  
+       
+} 
+
+@using (Html.BeginForm("StudentCompanyDetails", "StudentHome"))
+{
+    @Html.TextAreaFor(m => Model.additionalNotes);
+    <input type="submit" value = "Add new notes" />
+} 
+</p>
+</div>
+</div>
+
+@using (Html.BeginForm("StudentCompanyDetails", "StudentHome"))
+{
+    <div style="background-color:#FFE4C4; border-style:solid; float:right" >
+    <table>
+    <tr>
+    <td>Subject</td>
+    <td>
+    <input id="Text1" type="text" /></td>
+    </tr>
+    <tr>
+    <td>Body</td>
+    <td>
+    <textarea id="TextArea1" cols="20" rows="2"></textarea></td>
+    </tr>
+    </table>
+    </div>
+<div style="background-color:#FFE4C4; border-style:solid; float:right" >
+@foreach (MvcDemo.Models.CompanyRepresentative item in (List<MvcDemo.Models.CompanyRepresentative>)ViewData["CompanyRepresentative"])
+{
+    var isAlumni = "";
+    if (@item.isAlumni)
+    {
+        isAlumni = "Yes";
+    }
+    else
+    {
+        isAlumni = "No";
+    }
+    <table border="1">
+    <caption>Representatives Details</caption>
+    <tr>
+    <td>First Name</td>
+    <td>Last Name</td>
+    <td>Email</td>
+    <td>Is Alumni</td>
+    </tr>
+    <tr>
+    <td>@item.first_name</td>
+    <td>@item.last_name</td>
+    <td>@item.email</td>
+    <td>@isAlumni</td>
+    <td><a >Send Email</a></td>
+    </tr>
+    </table>
+}
+</div>
+}
+</div>
