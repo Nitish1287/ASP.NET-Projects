@@ -1,0 +1,198 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,700,700italic);
+@import url(https://fonts.googleapis.com/css?family=Shadows+Into+Light+Two);
+
+body { font-family: 'Open Sans', sans-serif; font-size:16px; font-weight: 300; color:#555; margin:0; padding:0; }
+
+#page { max-width:1200px; margin:0 auto; position: relative; }
+
+/* Text */
+
+h1 { margin:0 0 1em 0; font-size: 2.8em; font-weight: 700; }
+
+h2 { margin:0 0 .5em 0; font-size: 1.6em; font-weight: 700; line-height: 1.1em; }
+
+h3 { margin:0 0 1em 0; font-size: 1.3em; font-weight: 700; }
+
+h4 { margin:0 0 1.5em 0; font-size: 1em; font-weight: 700; }
+
+p { margin: 0 0 1em 0; }
+
+a { color: #007EFF; }
+a:visited { color:#65B1FF; }
+
+a.btn { font-size: 1.2em; text-decoration: none; color:#fff; border: 1px solid #fff; padding: 4px 15px; transition: background-color .5s; }
+a.btn:hover { background-color: rgba(0,0,0,.3); }
+
+/* Header */
+
+header { height:430px; background: url(../images/vac_background.jpg) no-repeat center top; position: relative; }
+
+header a.logo { 
+	z-index: 1;
+	position: absolute; 
+	display:block; width:120px; height:46px;
+	background: url(../images/Drawing.png) no-repeat 0 0; background-size: contain;
+	top: 25px; left:20px;	}
+	
+header span.logo-text {
+	z-index: 1;
+	position: absolute;
+	color: #fff;
+	text-align: right;
+	top: 25px; left: 100px;
+	font-family: 'Shadows Into Light Two', cursive;
+	font-size: larger;
+	font-weight: bolder;
+	}
+
+header a.logo span { display:none; }
+
+header div.hero { position: absolute; width: 42%; top:130px; left:55%; }
+header div.hero h1 { line-height: 1em; margin: 0 0 30px 0; color:#fff; }
+
+/* Section - All */
+section { padding: 0 10px; }
+section::after { content: ''; display: block; clear: both; }
+
+/* Section - Main */
+section.main { margin-top: 5px; margin-bottom: 5px; padding: 0; }
+section.main aside { width: 33%; float: left; text-align: center; }
+
+section.main .content { margin: 5px; background: no-repeat center top; background: 75px 75px; padding-top: 15px; }
+
+section.main aside .content h3 a { text-decoration: none; color: #539DC2; }
+section.main aside .content h3 a:hover { text-decoration: underline; }
+
+/* Section - Atmosphere */
+section.atmosphere { padding-top: 30px; position: relative; background: rgb(241,241,241); }
+
+section.atmosphere .content { margin: 15px; background: no-repeat center top; background: 75px 75px; padding-top: 15px; }
+
+section.atmosphere .sidebar ul li:hover { background: #8F8F8F; border-radius: 25px; }
+
+section.atmosphere .sidebar ul { list-style: none; padding: 0; margin: 0; }
+section.atmosphere .sidebar ul li a { display: inline-block; color: #000; padding: 20px 10px; text-decoration: none; width: 125px; position: relative; }
+
+section.atmosphere .sidebar { width: 20%; float: left; text-align: center; }
+section.atmosphere .images-slides { width: 60%; float: left; text-align: center; padding: 10px 0; }
+
+section.atmosphere .images-slides div a img { transition: opacity: 0s; }
+section.atmosphere .images-slides div a.big-image img { width:400px;height:250px; }
+section.atmosphere .images-slides div a.small-image img { width:250px;height:250px; }
+section.atmosphere .images-slides div a img:hover { opacity: 0.7; }
+
+/* Navigation */
+
+nav { background-color: rgba(0,0,0,.55); position: absolute; top: 0px; left: 0px; padding: 50px 0 0 0; width: 100%; }
+nav::after { content: ''; display: block; clear: both; }
+
+nav ul li a:hover { background: #BFEFFF; color: #083847; }
+
+nav ul { list-style: none; padding: 0; margin: 0; }
+nav ul li a { display: inline-block; color: #fff; padding: 20px 10px; text-decoration: none; width: 125px; position: relative; }
+
+nav > ul { padding-right: 20px; }
+
+nav > ul > li { float: right; }
+
+nav > ul > li > a { width: auto; padding: 10px 20px 15px 20px; }
+
+nav a[aria-haspopup="true"]::after { 
+	content:''; display: block; width: 0px; height: 0px; position: absolute; top: 16px; right: 15px; 
+	border-top: 4px solid transparent; border-bottom: 4px solid transparent; border-left: 4px solid white;
+}
+
+/* Footer */
+footer { text-align: center; padding: 40px; font-size: .8em; color: #999; background: rgb(3, 52, 92); color: white; }
+
+/* Media Queries */
+
+@media screen and (max-width: 1150px){
+	
+	/*section.atmosphere .images-slides div a img { max-width: 250px; }*/
+	
+	section.atmosphere .sidebar { width: 100%; float: none; text-align: left; margin: 0px; }
+	section.atmosphere .images-slides { width: 100%; float: none; text-align: center; padding: 10px 0; }
+	section.atmosphere .left-bar ul { display: flex; width: 100%; margin: 0px; text-align: center; }
+	section.atmosphere .right-bar ul { display: flex; width: 100%; margin: 0px; text-align: center; }
+	
+	section.atmosphere .image-slides { width: 100%; position: relative; }
+	section.atmosphere .images-slides div a.big-image { left: 0px; top: 0px; }
+	section.atmosphere .images-slides div a.big-image img { width: 400px; padding: 0px; margin: 0px; }
+	section.atmosphere .images-slides div a.small-image img { width: 250px; padding: 0px; margin: 0px; }	
+}
+
+/*@media screen and (max-width: 1000px) {
+	h1 { font-size: 1.8em; }
+	h3 { margin-bottom: 0px; }
+	a.btn { font-size: .9em; }
+	header { height: 250px; }
+	p { font-size: 1em; }
+}*/
+
+@media screen and (max-width: 720px){
+	
+	/*section.atmosphere .images-slides div a img { max-width: 250px; }*/
+	
+	section.atmosphere .image-slides { width: 100%; position: relative; }
+	section.atmosphere .images-slides div a.big-image { left: 0px; top: 0px; }
+	section.atmosphere .images-slides div a.big-image img { width: 240px; height: 200px; padding: 0px; margin: 0px; }
+	section.atmosphere .images-slides div a.small-image img { width: 150px; height: 200px; padding: 0px; margin: 0px; }	
+}
+
+@media screen and (max-width: 725px){
+	
+	section.atmosphere .left-bar { margin: 10px 0px; }
+	section.atmosphere .right-bar { margin: 10px 0px; }
+	
+	section.atmosphere .left-bar h3 { font-size: 1em; }
+	section.atmosphere .right-bar h3 { font-size: 1em; }
+	
+	section.atmosphere .left-bar ul { width: 100%; text-align: center; }
+	section.atmosphere .right-bar ul { width: 100%; margin: 0px; text-align: center; }
+	
+	section.atmosphere .left-bar ul li { display: block; width: 100%; text-align: center; }
+	section.atmosphere .right-bar ul li { display: block; width: 100%; margin: 0px; text-align: center; }
+	
+	section.atmosphere .left-bar ul li a { display: inline-block; font-size: .8em; width: 100%; padding: 10px 0px; vertical-align: middle; }
+	section.atmosphere .right-bar ul li a { display: inline-block; font-size: .8em; width: 100%; padding: 10px 0px; vertical-align: middle; }
+	
+}
+
+@media screen and (max-width: 640px) {
+	h1 { font-size: 1.2em; }
+	h3 { margin-bottom: 0px; }
+	a.btn { font-size: .9em; }
+	
+	/* Header */
+	header { height: 150px; }
+	header a.logo { width: 100%; height: 66px; left: 0px; top: 0px; background-color: rgba(0,0,0,.65); background-size: 56px 46px; background-position: 20px center; }
+	header span.logo-text { top: 8px; left: 80px; }
+	
+	header div.hero { width: 300px; top: 85px; left: 25%; }
+	header div.hero h1 { margin-bottom: 10px; }
+	
+	/* Section - Main */
+	section.main aside { width: 100%; float: none; text-align: left; }
+	
+	section.main aside div.content { 
+	
+		margin: 8px 20px 8px 0px;
+		padding: 5px 0px 5px 85px;
+		background-size: 50px 50px;
+		background-position: 20px 5px;
+		
+	}
+	
+	/* Section - Atmosphere */
+	section.atmosphere .images-slides { width: 100%; float: none; text-align: center; padding: 30px 0; }
+	section.atmosphere .image-slides { width: 100%; position: relative; }
+	section.atmosphere .images-slides div a.big-image { left: 0px; top: 0px; }
+	section.atmosphere .images-slides div a.big-image img { width: 160px; height: 150px; padding: 0px; margin: 0px; }
+	section.atmosphere .images-slides div a.small-image img { width: 100px; height: 150px; padding: 0px; margin: 0px; }
+	
+	
+	p { font-size: 1em; }
+	nav { position: static; width: auto; padding: 20px 15px; background-color: #083847; top: 0px; left: 0px; }
+	nav ul { padding-left: 15%; }
+}
